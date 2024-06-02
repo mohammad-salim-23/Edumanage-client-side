@@ -10,6 +10,8 @@ import AllClass from "../Pages/AllClass/AllClass";
 import Teach from "../Pages/Teach/Teach";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import AllUsers from "../Pages/AdminPages/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute/AdminRoute";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -34,8 +36,12 @@ import SignUp from "../Pages/SignUp/SignUp";
         {
           path:'/signUp',
           element:<SignUp></SignUp>
-        }
+        },
         // admin routes
+        {
+          path:'users',
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        }
         
       ]
     },
