@@ -1,11 +1,13 @@
 
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect,  useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { AuthContext } from '../../Provider/AuthProvider';
+
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
-import SocialComponent from '../../Components/SocialComponent/SocialComponent';
+
+import { AuthContext } from '../../Component/AuthContext/AuthProvider';
+import SocialComponent from '../../Component/SocialComponent';
 
 const SignIn = () => {
    const navigate = useNavigate();
