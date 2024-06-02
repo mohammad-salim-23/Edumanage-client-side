@@ -12,6 +12,7 @@ import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import AllUsers from "../Pages/AdminPages/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -27,7 +28,7 @@ import AdminRoute from "./AdminRoute/AdminRoute";
         },
         {
           path:'teach',
-          element:<Teach></Teach>
+          element:<PrivateRoute><Teach></Teach></PrivateRoute>
         },
         {
           path:"/signin",
