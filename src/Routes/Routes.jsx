@@ -9,6 +9,7 @@ import Home from "../Pages/Home/Home";
 import AllClass from "../Pages/AllClass/AllClass";
 import Teach from "../Pages/Teach/Teach";
 import SignIn from "../Pages/SignIn/SignIn";
+import SignUp from "../Pages/SignUp/SignUp";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -29,6 +30,10 @@ import SignIn from "../Pages/SignIn/SignIn";
         {
           path:"/signin",
           element:<SignIn></SignIn>
+        },
+        {
+          path:'/signUp',
+          element:<SignUp></SignUp>
         }
       ]
     },
