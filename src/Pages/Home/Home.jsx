@@ -1,9 +1,12 @@
+import Banner from "./Banner/Banner";
+import Partner from "./Partner/Partner";
 
 
 const Home = () => {
     return (
-        <div>
-            <h2>This is My Home</h2>
+        <div className="space-y-4">
+            <Banner></Banner>
+            <Partner></Partner>
         </div>
     );
 };

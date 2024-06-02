@@ -35,6 +35,8 @@ import SignUp from "../Pages/SignUp/SignUp";
           path:'/signUp',
           element:<SignUp></SignUp>
         }
+        // admin routes
+        
       ]
     },
   ]);

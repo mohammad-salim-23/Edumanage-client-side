@@ -3,10 +3,11 @@ import logo from "../assets/images/logo.jpg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Component/AuthContext/AuthProvider";
 
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
-
+  
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -15,12 +16,17 @@ const Navbar = () => {
     setShowDropdown(false);
   };
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   const navLinks = (
     <>
       <li className="text-[18px]"><Link to="/">Home</Link></li>
       <li className="text-[18px]"><Link to="/allClasses">All Classes</Link></li>
       <li className="text-[18px]"><Link to="/teach">Teach On 3 Idiots</Link></li>
-      <li className="lg:ml-8">
+      <li className="lg:ml-8 z-10">
         <label className="cursor-pointer grid place-items-center"></label>
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           {user ? (
@@ -44,8 +50,8 @@ const Navbar = () => {
               <li onClick={closeDropdown}>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              <li onClick={closeDropdown}>
-                <Link to="/logout">LogOut</Link>
+              <li> <button onClick={handleLogOut}>
+                LogOut</button>
               </li>
             </ul>
           </div>

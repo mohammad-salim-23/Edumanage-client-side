@@ -14,15 +14,15 @@ const SocialComponent = () => {
        googleSignIn()
        .then(result=>{
         console.log(result.user);
-        // const userInfo = {
-        //     email:result.user?.email,
-        //     name:result.user?.displayName
-        // }
-        // axiosPublic.post('/users',userInfo)
-        // .then(res=>{
-        //     console.log(res.data);
-        //     navigate('/');
-        // })
+        const userInfo = {
+            email:result.user?.email,
+            name:result.user?.displayName
+        }
+        axiosPublic.post('/users',userInfo)
+        .then(res=>{
+            console.log(res.data);
+            navigate('/');
+        })
        })
     }
     return (

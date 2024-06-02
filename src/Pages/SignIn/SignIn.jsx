@@ -46,7 +46,12 @@ const SignIn = () => {
               `
             }
           });
-          navigate(from , {replace:true});
+         if(location===null){
+            navigate('/');
+         }
+         else{
+            navigate(from , {replace:true});
+         }
         })
 
     }
