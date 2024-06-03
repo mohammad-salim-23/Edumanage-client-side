@@ -69,10 +69,10 @@ const SignIn = () => {
             <Helmet>
                 <title>3 Idiots | LogIn</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200">
-  <div className="hero-content flex-col lg:flex-row">
-    <div className="text-center md:w-1/2 lg:text-left">
-      <h1 className="text-5xl font-bold">Login now!</h1>
+            <div className=" min-h-screen bg-base-200 md:ml-8">
+  <div className=" ">
+    <div className="md:text-center md:w-1/2 lg:text-left">
+      <h1 className="text-5xl font-bold mb-4">Login now!</h1>
     
     </div>
     <div className="card md:w-1/2  shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -109,7 +109,7 @@ const SignIn = () => {
         
         </div>
         <div className="form-control mt-6">
-          <input disabled={disabled} className="btn bg-yellow-400" type="submit" value="Login" />
+          <input disabled={disabled} className="btn bg-primaryColor" type="submit" value="Login" />
         </div>
 
       </form>

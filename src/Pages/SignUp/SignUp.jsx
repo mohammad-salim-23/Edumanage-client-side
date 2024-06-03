@@ -35,7 +35,9 @@ const SignUp = () => {
       //  create user entry in the database
      const userInfo = {
         name: data.name,
-        email:data.email
+        email:data.email,
+        phone:data.phone,
+        image:data.photoURL
      }
       axiosPublic.post('/users',userInfo)
       .then(res=>{
@@ -66,8 +68,8 @@ const SignUp = () => {
                 <title>3 Idiots | SignUp</title>
             </Helmet>
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
+        <div className="hero-content flex-col ">
+          <div className="text-center ">
             <h1 className="text-5xl font-bold">SignUp now!</h1>
            
           </div>
@@ -101,6 +103,19 @@ const SignUp = () => {
                 />
                 {errors.photoURL && (
                   <span className="text-red-600 ">Photo URL is required</span>
+                )}
+                <label className="label">
+                  <span className="label-text">Phone Number</span>
+                </label>
+                <input
+                  type="number"
+                  {...register("phone", { required: true })}
+                 
+                  placeholder="phone"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className="text-red-600 ">phone numberis required</span>
                 )}
               </div>
               <div className="form-control">
@@ -160,7 +175,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p className="text-center mb-2">Alreade have an account go <Link className="font-bold" to="/login">Login Page</Link> </p>
+            <p className="text-center mb-2">Alreade have an account go <Link className="font-bold" to="/signin">Login Page</Link> </p>
             <SocialComponent></SocialComponent>
           </div>
         </div>

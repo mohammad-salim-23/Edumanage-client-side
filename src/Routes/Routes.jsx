@@ -13,6 +13,10 @@ import SignUp from "../Pages/SignUp/SignUp";
 import AllUsers from "../Pages/AdminPages/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Dashboard from "../LayOut/Dashboard/Dashboard";
+import AdminHome from "../Pages/AdminPages/AdminHome/AdminHome";
+import TeacherRequestList from "../Pages/AdminPages/TeacherRequestList/TeacherRequestList";
+import TeacherHome from "../LayOut/Dashboard/TeacherHome/TeacherHome";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -38,14 +42,47 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
           path:'/signUp',
           element:<SignUp></SignUp>
         },
-        // admin routes
-        {
-          path:'users',
-          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
-        }
+       
         
       ]
     },
+    
+       // admin routes
+      {
+        path:"dashboard",
+        element:<PrivateRoute>
+          <Dashboard></Dashboard>
+        </PrivateRoute>,
+        children:[
+          // Teachers route
+          {
+            path:'teacherHome',
+            element:<TeacherHome></TeacherHome>
+          },
+          {
+            path:'myProfile',
+          },
+          
+        //  admin Routes
+        {
+          path:"adminHome",
+          element:<AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        }
+        ,
+        {
+          path:'users',
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
+        {
+          path:'reqTeacher',
+          element:<AdminRoute><TeacherRequestList></TeacherRequestList></AdminRoute>
+        }
+
+        ]
+      }
+    
   ]);
 
 export default router;
