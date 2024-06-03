@@ -17,6 +17,9 @@ import Dashboard from "../LayOut/Dashboard/Dashboard";
 import AdminHome from "../Pages/AdminPages/AdminHome/AdminHome";
 import TeacherRequestList from "../Pages/AdminPages/TeacherRequestList/TeacherRequestList";
 import TeacherHome from "../LayOut/Dashboard/TeacherHome/TeacherHome";
+import MyProfile from "../hooks/MyProfile/MyProfile";
+import MyClass from "../Pages/TeacherRoute/MyClass";
+import AddClass from "../Pages/TeacherRoute/AddClass";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -61,6 +64,15 @@ import TeacherHome from "../LayOut/Dashboard/TeacherHome/TeacherHome";
           },
           {
             path:'myProfile',
+            element:<MyProfile></MyProfile>
+          },
+          {
+            path:'myClass',
+            element:<MyClass></MyClass>
+          },
+          {
+            path:'addClass',
+            element:<AddClass></AddClass>
           },
           
         //  admin Routes

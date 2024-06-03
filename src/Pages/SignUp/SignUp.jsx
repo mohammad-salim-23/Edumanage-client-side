@@ -115,7 +115,7 @@ const SignUp = () => {
                   className="input input-bordered"
                 />
                 {errors.photoURL && (
-                  <span className="text-red-600 ">phone numberis required</span>
+                  <span className="text-red-600 ">phone number is required</span>
                 )}
               </div>
               <div className="form-control">
