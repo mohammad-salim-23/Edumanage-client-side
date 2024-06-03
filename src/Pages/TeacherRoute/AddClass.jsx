@@ -60,7 +60,7 @@ const AddClass = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/my-classes");
+        navigate("/myClass");
       }
     }
   };
@@ -104,7 +104,7 @@ const AddClass = () => {
         <div className="form-control w-full my-6">
           <label className="label-text">Price*</label>
           <input
-            type="number"
+            type="text"
             placeholder="Price"
             {...register("price", { required: true })}
             className="input input-bordered w-full"

@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [isTeacher] = useTeacher();
     return (
         <div className="flex gap-8">
-            <div className="w-64 min-h-screen bg-primaryColor">
+            <div className="w-64 min-h-screen bg-green-300">
         <ul className="menu">
          {
           isAdmin ?
@@ -52,12 +52,7 @@ const Dashboard = () => {
          {
             isTeacher && !isAdmin && 
            <>
-            <li>
-            <NavLink to="/dashboard/userHome">
-             <FaHome></FaHome>
-             user Home
-            </NavLink>
-          </li>
+           
           <li>
             <NavLink to="/dashboard/addClass">
             <FaSchool></FaSchool>

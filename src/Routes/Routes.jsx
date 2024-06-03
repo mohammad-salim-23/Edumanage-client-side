@@ -74,6 +74,8 @@ import AddClass from "../Pages/TeacherRoute/AddClass";
             path:'addClass',
             element:<AddClass></AddClass>
           },
+         
+          
           
         //  admin Routes
         {
