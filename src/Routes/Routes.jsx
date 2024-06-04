@@ -21,6 +21,7 @@ import MyProfile from "../hooks/MyProfile/MyProfile";
 import MyClass from "../Pages/TeacherRoute/MyClass";
 import AddClass from "../Pages/TeacherRoute/AddClass";
 import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
+import ClassDetails from "../Pages/ClassDetails/ClassDetails";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -46,6 +47,11 @@ import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
           path:'/signUp',
           element:<SignUp></SignUp>
         },
+        {
+          path:'/classDetails/:id',
+          element:<PrivateRoute><ClassDetails></ClassDetails></PrivateRoute>,
+          loader:({params})=>fetch(`http://localhost:5000/class/${params.id}`)
+        }
        
         
       ]
