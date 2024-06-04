@@ -45,6 +45,9 @@ const AddClass = () => {
         price: data.price,
         description: data.description,
         image: res.data.data.display_url,
+        experience:data.experience,
+        category:data.category,
+        enrollment:data.enrollment,
         status: "pending"
       };
 
@@ -60,7 +63,7 @@ const AddClass = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/myClass");
+        navigate("/dashboard/myClass");
       }
     }
   };
@@ -110,6 +113,34 @@ const AddClass = () => {
             className="input input-bordered w-full"
           />
         </div>
+        <div className="form-control w-full my-6">
+            <div className="label">
+              <span className="label-text">Experience*</span>
+            </div>
+            <select
+              {...register("experience", { required: true })}
+              className="select select-bordered w-full"
+            >
+              <option value="beginner">Beginner</option>
+              <option value="mid-level">Mid-level</option>
+              <option value="experienced">Experienced</option>
+            </select>
+          </div>
+          <div className="form-control w-full my-6">
+            <div className="label">
+              <span className="label-text">Category*</span>
+            </div>
+            <select
+              {...register("category", { required: true })}
+              className="select select-bordered w-full"
+            >
+              <option value="web-development">Web Development</option>
+              <option value="digital-marketing">Digital Marketing</option>
+              <option value="data-science">Data Science</option>
+              <option value="graphic-design">Graphic Design</option>
+              <option value="software-engineering">Software Engineering</option>
+            </select>
+          </div>
         <div className="form-control w-full my-6">
           <label className="label-text">enrollment*</label>
           <input

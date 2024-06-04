@@ -46,12 +46,9 @@ const SignIn = () => {
               `
             }
           });
-         if(location===null){
-            navigate('/');
-         }
-         else{
-            navigate(from , {replace:true});
-         }
+        
+         navigate('/');
+         
         })
 
     }

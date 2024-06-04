@@ -24,6 +24,7 @@ const SocialComponent = () => {
             navigate('/');
         })
        })
+       navigate('/');
     }
     return (
         <div className="px-32">

@@ -20,6 +20,7 @@ import TeacherHome from "../LayOut/Dashboard/TeacherHome/TeacherHome";
 import MyProfile from "../hooks/MyProfile/MyProfile";
 import MyClass from "../Pages/TeacherRoute/MyClass";
 import AddClass from "../Pages/TeacherRoute/AddClass";
+import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -31,7 +32,7 @@ import AddClass from "../Pages/TeacherRoute/AddClass";
         },
         {
           path:'allClasses',
-          element:<AllClass></AllClass>
+          element:<AllClassForAll></AllClassForAll>
         },
         {
           path:'teach',
@@ -92,6 +93,10 @@ import AddClass from "../Pages/TeacherRoute/AddClass";
         {
           path:'reqTeacher',
           element:<AdminRoute><TeacherRequestList></TeacherRequestList></AdminRoute>
+        },
+        {
+          path:'allClass',
+          element:<AdminRoute><AllClass></AllClass></AdminRoute>
         }
 
         ]

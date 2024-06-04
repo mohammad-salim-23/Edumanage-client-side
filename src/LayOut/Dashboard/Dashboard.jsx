@@ -35,7 +35,7 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/allClasses">
+            <NavLink to="/dashboard/allClass">
             <FaBroom></FaBroom>
              All Classes
             </NavLink>
