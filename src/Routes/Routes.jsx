@@ -22,6 +22,7 @@ import MyClass from "../Pages/TeacherRoute/MyClass";
 import AddClass from "../Pages/TeacherRoute/AddClass";
 import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
+import PaymantPage from "../Pages/PaymentPage/PaymantPage";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -51,6 +52,10 @@ import ClassDetails from "../Pages/ClassDetails/ClassDetails";
           path:'/classDetails/:id',
           element:<PrivateRoute><ClassDetails></ClassDetails></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:5000/class/${params.id}`)
+        },
+        {
+          path:'pay',
+          element:<PaymantPage></PaymantPage>
         }
        
         

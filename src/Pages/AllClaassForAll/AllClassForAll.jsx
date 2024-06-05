@@ -32,7 +32,7 @@ const AllClassForAll = () => {
             </p>
             {/* /classDetails/:id */}
           <Link to={`/classDetails/${classItem._id}`}>
-          <button className="btn btn-success">Enroll</button>
+          <button className="btn btn-success btn-outline btn-block">Enroll</button>
           </Link>
           
           </div>
