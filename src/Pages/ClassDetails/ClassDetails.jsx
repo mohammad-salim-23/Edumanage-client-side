@@ -1,9 +1,14 @@
-import { Link, useLoaderData } from "react-router-dom";
+import {  Link, useLoaderData, useNavigate } from "react-router-dom";
+
 
 
 const ClassDetails = () => {
-    const classItem = useLoaderData();
+   const classItem = useLoaderData();
     console.log(classItem);
+
+    
+   
+ 
     return (
        <div className="flex items-center justify-center min-h-screen">
          <div className=" p-4  ">
@@ -22,9 +27,11 @@ const ClassDetails = () => {
                     <p className="">{classItem.description}</p>
                     <p className="class-enrolment">Total Enrolment: {classItem?.enrollment}</p>
                     <div className="">
-                       <Link to="/pay">
-                       <button className="btn btn-success btn-block btn-outline" >Pay</button>
-                       </Link>
+                       
+                    <Link to={`/pay/${classItem._id}`}>
+                    <button  className="btn btn-success btn-block btn-outline" >Pay</button>
+                    </Link>
+                    
                     </div>
                 </div>
             </div>

@@ -54,8 +54,9 @@ import PaymantPage from "../Pages/PaymentPage/PaymantPage";
           loader:({params})=>fetch(`http://localhost:5000/class/${params.id}`)
         },
         {
-          path:'pay',
-          element:<PaymantPage></PaymantPage>
+          path:'/pay/:id',
+          element:<PaymantPage></PaymantPage>,
+          loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
         }
        
         

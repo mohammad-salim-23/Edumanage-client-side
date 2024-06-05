@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
-const CheckOutForm = () => {
+const CheckOutForm = ({price}) => {
     const [error,setError] = useState('');
    const[transictionId,setTransictionId] = useState('');
    const [clientSecret, setClientSecret] = useState('')
@@ -16,12 +16,15 @@ const CheckOutForm = () => {
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
     useEffect(()=>{
-        axiosSecure.post('/create-payment-intent')
+        console.log(price);
+       if(price){
+        axiosSecure.post('/create-payment-intent',{price})
         .then(res=>{
-            console.log(res.data.clentSecret);
+            console.log(res.data.clientSecret);
             setClientSecret(res.data.clientSecret);
         })
-    },[axiosSecure])
+       }
+    },[axiosSecure,price])
     const handleSubmit = async(event)=>{
         event.preventDefault();
         if(!stripe || !elements){
@@ -64,7 +67,7 @@ const CheckOutForm = () => {
                     email:user.email,
                     transactionId:paymentIntent.id,
                     date:new Date(),
-                    
+                    price:price,
                 }
                 const res = await axiosSecure.post('/payments',payment);
                 if(res?.data?.paymentResult?.insertedId){
