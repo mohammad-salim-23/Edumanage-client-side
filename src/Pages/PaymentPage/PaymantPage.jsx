@@ -1,10 +1,12 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckOutForm from "./CheckOutForm/CheckOutForm";
-import { useLocation } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 
 
 const PaymantPage = () => {
+    const payment = useLoaderData();
+    console.log(payment);
     const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
     const location = useLocation();
     const { state } = location; // Access the state object directly
@@ -18,7 +20,7 @@ const PaymantPage = () => {
         <div>
         <div>
             <Elements stripe = {stripePromise}>
-                <CheckOutForm price={price} ></CheckOutForm>
+                <CheckOutForm price={payment.price} ></CheckOutForm>
             </Elements>
         </div>
         </div>
