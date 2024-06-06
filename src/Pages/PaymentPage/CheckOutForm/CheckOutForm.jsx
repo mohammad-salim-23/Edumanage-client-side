@@ -5,7 +5,7 @@ import { AuthContext } from "../../../Component/AuthContext/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CheckOutForm = ({price}) => {
+const CheckOutForm = ({price,id}) => {
     const [error, setError] = useState('');
     const [transictionId, setTransictionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
@@ -17,7 +17,7 @@ const CheckOutForm = ({price}) => {
 
     // Parse and clean the price
     const cleanPrice = parseFloat(price.replace(/[^\d.-]/g, ''));
-
+      const classId = id;
     useEffect(() => {
         console.log(cleanPrice);
         if (cleanPrice > 0) {
@@ -68,12 +68,13 @@ const CheckOutForm = ({price}) => {
                 setTransictionId(paymentIntent.id);
                 // now save the payment in the database
                 const payment = {
+                    name:user.name,
                     email: user.email,
-                    transactionId: paymentIntent.id,
+                    transactionId: paymentIntent.id,           
                     date: new Date(),
                     price: cleanPrice,
                 };
-                const res = await axiosSecure.post('/payments', payment);
+                const res = await axiosSecure.post(`/payments/${classId}`, payment);
                 console.log(res.data)
                 if (res?.data?.paymentResult?.insertedId) {
                     Swal.fire({

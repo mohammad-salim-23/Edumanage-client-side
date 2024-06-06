@@ -20,7 +20,7 @@ const PaymantPage = () => {
         <div>
         <div>
             <Elements stripe = {stripePromise}>
-                <CheckOutForm price={payment.price} ></CheckOutForm>
+                <CheckOutForm price={payment.price} id={payment._id}></CheckOutForm>
             </Elements>
         </div>
         </div>
