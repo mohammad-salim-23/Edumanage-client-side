@@ -110,12 +110,25 @@ const Navbar = () => {
               <div className="absolute top-full right-0 mt-1 w-52 shadow rounded-md font-bold bg-black text-white z-10">
                 <ul className="p-2">
                   {user && <li>{user.displayName}</li>}
+                  {isAdmin && (
+                    <li onClick={closeDropdown}>
+                      <Link to="/dashboard/adminHome">Dashboard</Link>
+                    </li>
+                  )}
+                  {isTeacher && !isAdmin && (
+                    <li onClick={closeDropdown}>
+                      <Link to="/dashboard/teacherHome">Dashboard</Link>
+                    </li>
+                  )}
+                  {isStudent && !isAdmin && !isTeacher && (
+                    <li onClick={closeDropdown}>
+                      <Link to="/dashboard/myEnrollment">Dashboard</Link>
+                    </li>
+                  )}
                   <li onClick={closeDropdown}>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li>
                     <button onClick={handleLogOut}>LogOut</button>
                   </li>
+                 
                 </ul>
               </div>
             )}

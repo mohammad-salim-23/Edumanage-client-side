@@ -2,7 +2,7 @@
 import "../../../Component/All.css"
 const Banner = () => {
   return (
-    <div className="carousel w-full  img-style mt-2">
+    <div className="carousel w-full  img-style mt-12">
       <div id="slide1" className="carousel-item relative w-full">
         <img 
           src="https://img.freepik.com/free-photo/3d-illustration-group-three-businessmen-showing-thumbs-up-gesture_1057-44715.jpg?t=st=1717321949~exp=1717325549~hmac=b2921c744a89669babe2dca0b77190eef3c9d181f1177c55a9d9282c14cbf67f&w=740"
