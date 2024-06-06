@@ -4,12 +4,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Component/AuthContext/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import useTeacher from "../hooks/useTeacher/useTeacher";
+import useStudent from "../hooks/useStudent/useStudent";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isAdmin] = useAdmin();
   const [isTeacher] = useTeacher();
+  const [isStudent] = useStudent();
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -46,6 +48,13 @@ const Navbar = () => {
           <Link to="/dashboard/teacherHome"> Dashboard</Link>
         </li>
       )}
+      {
+        user && isStudent && !isAdmin && !isTeacher && (
+          <li>
+          <Link to="/dashboard/myEnrollment"> Dashboard</Link>
+        </li>
+        )
+      }
 
     </>
   );

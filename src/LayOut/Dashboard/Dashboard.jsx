@@ -3,11 +3,13 @@ import useAdmin from "../../hooks/useAdmin";
 import { FaBroom, FaChalkboardTeacher, FaHome, FaSchool, FaUser, FaUserAlt } from "react-icons/fa";
 import { FaPersonRifle } from "react-icons/fa6";
 import useTeacher from "../../hooks/useTeacher/useTeacher";
-
+import useStudent from "../../hooks/useStudent/useStudent";
+import { IoBookOutline } from "react-icons/io5";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const [isTeacher] = useTeacher();
+    const [isStudent] = useStudent();
     return (
         <div className="flex gap-8">
             <div className="w-64 min-h-screen bg-green-300">
@@ -72,6 +74,22 @@ const Dashboard = () => {
             </NavLink>
           </li>
            </>
+         }
+         {
+          isStudent && !isTeacher && !isAdmin && <>
+           <li>
+            <NavLink to="/dashboard/myEnrollment">
+            <IoBookOutline />
+             My EnRoll Class
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/myProfile">
+            <FaUserAlt></FaUserAlt>
+             My Profile
+            </NavLink>
+          </li>
+          </>
          }
          <div className="divider">
          </div>

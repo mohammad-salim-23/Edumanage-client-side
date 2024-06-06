@@ -23,6 +23,7 @@ import AddClass from "../Pages/TeacherRoute/AddClass";
 import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import PaymantPage from "../Pages/PaymentPage/PaymantPage";
+import MyEnrollClass from "../LayOut/Dashboard/StudentDashboard/MyEnrollClass";
  const router = createBrowserRouter([
     {
       path: "/",
@@ -70,6 +71,10 @@ import PaymantPage from "../Pages/PaymentPage/PaymantPage";
           <Dashboard></Dashboard>
         </PrivateRoute>,
         children:[
+          {
+              path:'myEnrollment',
+              element:<MyEnrollClass></MyEnrollClass>
+          },
           // Teachers route
           {
             path:'teacherHome',
