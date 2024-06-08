@@ -13,7 +13,7 @@ const Root = () => {
             <div className="bg-primaryColor navbarr text-black mb-96">
             <Navbar></Navbar>
             </div>
-          <div className="mt-16"> <Outlet></Outlet> </div>
+          <div className="mt-24"> <Outlet></Outlet> </div>
            <div className="divider"></div>
           <Footer></Footer>
         </div>

@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const AllClassForAll = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const { data: classes = [], refetch } = useQuery({
       queryKey: ["classes"],
       queryFn: async () => {
-        const res = await axiosSecure.get("/classes");
+        const res = await axiosPublic.get("/classes");
         return res.data;
       },
     });
@@ -34,6 +35,7 @@ const AllClassForAll = () => {
           <Link to={`/classDetails/${classItem._id}`}>
           <button className="btn btn-success btn-outline btn-block">Enroll</button>
           </Link>
+        
           
           </div>
         ))}

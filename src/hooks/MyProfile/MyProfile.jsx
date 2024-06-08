@@ -23,11 +23,11 @@ const MyProfile = () => {
   <div className="card-body">
     <h2 className="card-title">{users?.name}</h2>
     <p className="font-medium">{users?.role}</p>
-    <p className="font-medium">{users?.email}</p>
-    <p className="font-medium">{users?.phone}</p>
+    <p className="font-medium">email:{users?.email}</p>
+    <p className="font-medium">phone number:{users?.phone}</p>
 
   </div>
-  <figure><img src={user?.photoURL} alt="Shoes" /></figure>
+  <figure><img className="h-96 w-96" src={user?.photoURL} alt="Shoes" /></figure>
 </div>
         </div>
     );

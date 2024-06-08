@@ -24,10 +24,14 @@ import AllClassForAll from "../Pages/AllClaassForAll/AllClassForAll";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import PaymantPage from "../Pages/PaymentPage/PaymantPage";
 import MyEnrollClass from "../LayOut/Dashboard/StudentDashboard/MyEnrollClass";
+import ErrorPage from "../Pages/ErrorPage";
+import Review from "../Pages/Review";
+// import Feedback from "../Component/Feedback/Feedback"
  const router = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement: <ErrorPage></ErrorPage>,
       children:[
         {
             path:'/',
@@ -70,10 +74,15 @@ import MyEnrollClass from "../LayOut/Dashboard/StudentDashboard/MyEnrollClass";
         element:<PrivateRoute>
           <Dashboard></Dashboard>
         </PrivateRoute>,
+         errorElement: <ErrorPage></ErrorPage>,
         children:[
           {
               path:'myEnrollment',
               element:<MyEnrollClass></MyEnrollClass>
+          },
+          {
+           path:'feedback',
+           element:<PrivateRoute><Review></Review></PrivateRoute>
           },
           // Teachers route
           {

@@ -1,6 +1,6 @@
 import { NavLink,Outlet } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
-import { FaBroom, FaChalkboardTeacher, FaHome, FaSchool, FaUser, FaUserAlt } from "react-icons/fa";
+import { FaBroom, FaChalkboardTeacher, FaHome, FaSchool, FaStar, FaUser, FaUserAlt } from "react-icons/fa";
 import { FaPersonRifle } from "react-icons/fa6";
 import useTeacher from "../../hooks/useTeacher/useTeacher";
 import useStudent from "../../hooks/useStudent/useStudent";
@@ -88,6 +88,11 @@ const Dashboard = () => {
             <FaUserAlt></FaUserAlt>
              My Profile
             </NavLink>
+            <NavLink to="/dashboard/feedback">
+            <FaStar></FaStar>
+             Feedback
+            </NavLink>
+            
           </li>
           </>
          }

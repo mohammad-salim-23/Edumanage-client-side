@@ -1,83 +1,57 @@
-import { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
-import { AuthContext } from "../../Component/AuthContext/AuthProvider";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
-const AddClass = () => {
-  const { register, handleSubmit, reset, setValue } = useForm();
+
+
+
+const FeedbackForm = () => {
+  const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user?.displayName) {
-      setValue("name", user.displayName);
-    }
-    if (user?.email) {
-      setValue("email", user.email);
-    }
-  }, [user, setValue]);
+ 
+ 
 
   const onSubmit = async (data) => {
-    // Image upload to imgbb
-    const imageFile = new FormData();
-    imageFile.append("image", data.image[0]);
+    const feedbackData = {
+      feedback: data.feedback,
+      name: data.name,
+      image: data.image,
+      title: data.title,
+    };
 
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-
-    if (res.data.success) {
-      // Prepare the new class data
-      const newClass = {
-        title: data.title,
-        name: user.displayName,
-        email: user.email,
-        price: data.price,
-        description: data.description,
-        image: res.data.data.display_url,
-        experience:data.experience,
-        category:data.category,
-        enrollment:data.enrollment,
-        status: "pending"
-      };
-
-      // Store the class data in MongoDB
-      const response = await axiosSecure.post("/classes", newClass);
+    try {
+      const response = await axiosPublic.post('/feedback', feedbackData);
       if (response.data.insertedId) {
-        // Show success popup and redirect
         reset();
         Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `Class "${data.title}" has been added successfully`,
+          position: 'top-end',
+          icon: 'success',
+          title: `Feedback submitted successfully`,
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/dashboard/myClass");
+      
+      
       }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      });
     }
   };
 
   return (
     <div className="form-container">
-      <h2>Add a New Class</h2>
+      <h2>Submit Your Feedback</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full my-6">
-          <label className="label-text">Title*</label>
-          <input
-            type="text"
-            placeholder="Title"
-            {...register("title", { required: true })}
+          <label className="label-text">Feedback*</label>
+          <textarea
+            placeholder="Your feedback"
+            {...register('feedback', { required: true })}
             className="input input-bordered w-full"
           />
         </div>
@@ -86,97 +60,38 @@ const AddClass = () => {
           <label className="label-text">Name*</label>
           <input
             type="text"
-            value={user?.displayName || ""}
-            readOnly
-            {...register("name", { required: true })}
+            placeholder="Your name"
+            {...register('name', { required: true })}
             className="input input-bordered w-full"
           />
         </div>
 
         <div className="form-control w-full my-6">
-          <label className="label-text">Email*</label>
-          <input
-            type="email"
-            value={user?.email || ""}
-            readOnly
-            {...register("email", { required: true })}
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        <div className="form-control w-full my-6">
-          <label className="label-text">Price*</label>
+          <label className="label-text">Image URL*</label>
           <input
             type="text"
-            placeholder="Price"
-            {...register("price", { required: true })}
-            className="input input-bordered w-full"
-          />
-        </div>
-        <div className="form-control w-full my-6">
-            <div className="label">
-              <span className="label-text">Experience*</span>
-            </div>
-            <select
-              {...register("experience", { required: true })}
-              className="select select-bordered w-full"
-            >
-              <option value="beginner">Beginner</option>
-              <option value="mid-level">Mid-level</option>
-              <option value="experienced">Experienced</option>
-            </select>
-          </div>
-          <div className="form-control w-full my-6">
-            <div className="label">
-              <span className="label-text">Category*</span>
-            </div>
-            <select
-              {...register("category", { required: true })}
-              className="select select-bordered w-full"
-            >
-              <option value="web-development">Web Development</option>
-              <option value="digital-marketing">Digital Marketing</option>
-              <option value="data-science">Data Science</option>
-              <option value="graphic-design">Graphic Design</option>
-              <option value="software-engineering">Software Engineering</option>
-            </select>
-          </div>
-        <div className="form-control w-full my-6">
-          <label className="label-text">enrollment*</label>
-          <input
-            type="number"
-            value={0}
-            placeholder="enrollment"
-            readOnly
-            {...register("enrollment", { required: true })}
+            placeholder="Image URL"
+            {...register('image', { required: true })}
             className="input input-bordered w-full"
           />
         </div>
 
         <div className="form-control w-full my-6">
-          <label className="label-text">Description*</label>
-          <textarea
-            placeholder="Description"
-            {...register("description", { required: true })}
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        <div className="form-control w-full my-6">
-          <label className="label-text">Image*</label>
+          <label className="label-text">Class Title*</label>
           <input
-            type="file"
-            {...register("image", { required: true })}
-            className="file-input w-full max-w-xs"
+            type="text"
+            placeholder="Class title"
+            {...register('title', { required: true })}
+            className="input input-bordered w-full"
           />
         </div>
 
         <button type="submit" className="btn btn-block bg-primaryColor">
-          Add Class
+          Submit Feedback
         </button>
       </form>
     </div>
   );
 };
 
-export default AddClass;
+export default FeedbackForm;
