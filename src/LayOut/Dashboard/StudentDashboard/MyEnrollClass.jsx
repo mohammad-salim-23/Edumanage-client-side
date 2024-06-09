@@ -8,7 +8,7 @@ const MyEnrollClass = () => {
     const axiosSecure = useAxiosSecure();
    
     const {data:classes=[],refetch} = useQuery({
-        queryKey:['users'],
+        queryKey:['classes'],
         queryFn:async()=>{
             const res = await axiosSecure.get(`/classes/${user.email}`);
             return res.data;

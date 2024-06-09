@@ -26,6 +26,7 @@ import PaymantPage from "../Pages/PaymentPage/PaymantPage";
 import MyEnrollClass from "../LayOut/Dashboard/StudentDashboard/MyEnrollClass";
 import ErrorPage from "../Pages/ErrorPage";
 import Review from "../Pages/Review";
+import Update from "../Pages/TeacherRoute/Update/Update";
 // import Feedback from "../Component/Feedback/Feedback"
  const router = createBrowserRouter([
     {
@@ -93,6 +94,11 @@ import Review from "../Pages/Review";
             path:'myProfile',
             element:<MyProfile></MyProfile>
           },
+          {
+            path:'update/:id',
+            element:<Update></Update>
+          }
+          ,
           {
             path:'myClass',
             element:<MyClass></MyClass>
