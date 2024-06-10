@@ -11,7 +11,12 @@ const MyClass = () => {
   const navigate = useNavigate();
   const [localClasses, setLocalClasses] = useState([]);
 
-  const { data: classes = [], isLoading, isError, error } = useQuery({
+  const {
+    data: classes = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["classes", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/classes/${user?.email}`);
@@ -23,31 +28,29 @@ const MyClass = () => {
 
   const handleDeleteClass = async (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const res = await axiosSecure.delete(`/class/${id}`);
           if (res.data) {
             // Update local state by removing the deleted class
-            setLocalClasses((prevClasses) => prevClasses.filter((classItem) => classItem._id !== id));
-            Swal.fire(
-              'Deleted!',
-              'Your class has been deleted.',
-              'success'
+            setLocalClasses((prevClasses) =>
+              prevClasses.filter((classItem) => classItem._id !== id)
             );
+            Swal.fire("Deleted!", "Your class has been deleted.", "success");
           }
         } catch (error) {
           Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
           });
         }
       }
@@ -78,23 +81,30 @@ const MyClass = () => {
             <h3 className="text-2xl font-bold">Title: {classItem.title}</h3>
             <p className="font-medium">Description: {classItem.description}</p>
             <p className="font-semibold">Price: ${classItem.price}</p>
-            <img className="h-96 w-96" src={classItem.image} alt={classItem.title} />
+            <img
+              className="h-96 w-96"
+              src={classItem.image}
+              alt={classItem.title}
+            />
             <p className="font-semibold">Status: {classItem.status}</p>
-           <div className="md:flex  gap-5">
-            <Link to={`/dashboard/update/${classItem._id}`}>
-              <button className="btn btn-success">Update</button>
-            </Link>
-           <button onClick={() => handleDeleteClass(classItem._id)} className="btn btn-warning m-2">
-              Delete
-            </button>
-            <button
-              className="btn"
-              disabled={classItem.status === 'pending'}
-              onClick={() => navigate(`/dashboard/my-class/${classItem._id}`)}
-            >
-              See Details
-            </button>
-           </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <Link to={`/dashboard/update/${classItem._id}`}>
+                <button className="btn btn-success ">Update</button>
+              </Link>
+              <button
+                onClick={() => handleDeleteClass(classItem._id)}
+                className="btn btn-warning "
+              >
+                Delete
+              </button>
+              <button
+                className="btn"
+                disabled={classItem.status === "pending"}
+                onClick={() => navigate(`/dashboard/my-class/${classItem._id}`)}
+              >
+                See Details
+              </button>
+            </div>
             <div className="divider"></div>
           </div>
         ))}

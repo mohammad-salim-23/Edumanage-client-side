@@ -7,6 +7,7 @@ import { useLoaderData, useLocation } from "react-router-dom";
 const PaymantPage = () => {
     const payment = useLoaderData();
     console.log(payment);
+    console.log(payment);
     const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
     const location = useLocation();
     const { state } = location; // Access the state object directly
@@ -17,10 +18,10 @@ const PaymantPage = () => {
     console.log(price);
   
     return (
-        <div>
+        <div className="mt-32">
         <div>
             <Elements stripe = {stripePromise}>
-                <CheckOutForm price={payment.price} id={payment._id}></CheckOutForm>
+                <CheckOutForm payment={payment}></CheckOutForm>
             </Elements>
         </div>
         </div>

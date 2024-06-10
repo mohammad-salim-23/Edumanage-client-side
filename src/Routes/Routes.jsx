@@ -27,6 +27,7 @@ import MyEnrollClass from "../LayOut/Dashboard/StudentDashboard/MyEnrollClass";
 import ErrorPage from "../Pages/ErrorPage";
 import Review from "../Pages/Review";
 import Update from "../Pages/TeacherRoute/Update/Update";
+import SeeDetails from "../Pages/TeacherRoute/SeeDetails/SeeDetails";
 // import Feedback from "../Component/Feedback/Feedback"
  const router = createBrowserRouter([
     {
@@ -96,9 +97,18 @@ import Update from "../Pages/TeacherRoute/Update/Update";
           },
           {
             path:'update/:id',
-            element:<Update></Update>
+            element:<Update></Update>,
+            loader:({params})=>
+              fetch(`http://localhost:5000/class/${params.id}`)
           }
           ,
+          {
+              path:'my-class/:id',
+              element:<SeeDetails></SeeDetails>,
+              loader:({params})=>
+                fetch(`http://localhost:5000/class/${params.id}`)
+
+          },
           {
             path:'myClass',
             element:<MyClass></MyClass>

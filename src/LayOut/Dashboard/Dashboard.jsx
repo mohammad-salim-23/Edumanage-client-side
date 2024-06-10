@@ -3,13 +3,16 @@ import useAdmin from "../../hooks/useAdmin";
 import { FaBroom, FaChalkboardTeacher, FaHome, FaSchool, FaStar, FaUser, FaUserAlt } from "react-icons/fa";
 import { FaPersonRifle } from "react-icons/fa6";
 import useTeacher from "../../hooks/useTeacher/useTeacher";
-import useStudent from "../../hooks/useStudent/useStudent";
+
 import { IoBookOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { AuthContext } from "../../Component/AuthContext/AuthProvider";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const [isTeacher] = useTeacher();
-    const [isStudent] = useStudent();
+  
+    const {user } = useContext(AuthContext); 
     return (
         <div className="flex gap-8">
             <div className="w-64 min-h-screen bg-green-300">
@@ -76,7 +79,7 @@ const Dashboard = () => {
            </>
          }
          {
-          isStudent && !isTeacher && !isAdmin && <>
+          user && !isTeacher && !isAdmin && <>
            <li>
             <NavLink to="/dashboard/myEnrollment">
             <IoBookOutline />

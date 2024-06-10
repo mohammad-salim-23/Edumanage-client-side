@@ -1,58 +1,62 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import {  useNavigate, useLoaderData } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
-
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Component/AuthContext/AuthProvider';
 import useAxiosSecure from '../../../hooks/useAxiosSecure/useAxiosSecure';
 
 const Update = () => {
-  const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const classInfo = useLoaderData();
+  console.log(classInfo);
+  const { register, handleSubmit, reset, setValue } = useForm();
   const axiosSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { register, handleSubmit, setValue } = useForm();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchClass = async () => {
+    // Fetch class data by ID and set it to the form
+    const fetchClassData = async () => {
       try {
-        const res = await axiosSecure.get(`/class/${id}`);
-        const classData = res.data;
+        const response = await axiosSecure.get(`/class/${classInfo._id}`);
+        const classData = response.data;
         setValue('title', classData.title);
         setValue('price', classData.price);
+        setValue('description', classData.description);
         setValue('experience', classData.experience);
         setValue('category', classData.category);
-        setValue('description', classData.description);
-        setLoading(false);
       } catch (error) {
-        console.error('Failed to fetch class data:', error);
+        console.error('Error fetching class data:', error);
       }
     };
 
-    fetchClass();
-  }, [id, setValue, axiosSecure]);
+    fetchClassData();
+  }, [classInfo._id,setValue, axiosSecure]);
 
   const onSubmit = async (data) => {
+    const updateClass = {
+      title: data.title,
+      price: data.price,
+      description: data.description,
+      experience: data.experience,
+      category: data.category,
+    };
+
     try {
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
-      const res = await axiosSecure.put(`/class/${id}`, formData);
-      if (res.data) {
-        Swal.fire('Success!', 'Class updated successfully', 'success');
+      const response = await axiosSecure.put(`/class/${classInfo._id}`, updateClass);
+      console.log(response);
+      if (response.data.modifiedCount > 0) {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Class Updated Successfully',
+          icon: 'success',
+          confirmButtonText: 'Cool',
+        });
         navigate('/dashboard/myClass');
       }
     } catch (error) {
-      Swal.fire('Error!', 'Failed to update class', 'error');
+      console.error('Error updating class:', error);
     }
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -130,23 +134,12 @@ const Update = () => {
           </select>
         </div>
 
-       
-
         <div className="form-control w-full my-6">
           <label className="label-text">Description*</label>
           <textarea
             placeholder="Description"
             {...register('description', { required: true })}
             className="input input-bordered w-full"
-          />
-        </div>
-
-        <div className="form-control w-full my-6">
-          <label className="label-text">Image*</label>
-          <input
-            type="file"
-            {...register('image')}
-            className="file-input w-full max-w-xs"
           />
         </div>
 
