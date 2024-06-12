@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Component/AuthContext/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const MyEnrollClass = () => {
   const { user, loading } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const MyEnrollClass = () => {
       <h2 className="text-4xl text-center m-2">My Enrollment Classes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
         {classes.map((classItem) => (
-          <div key={classItem._id} className="card w-96 bg-base-100 shadow-xl">
+          <div key={classItem._id} className="card md:w-96 bg-base-100 shadow-xl">
             <figure>
               <img src={classItem.image} alt={classItem.title} />
             </figure>
@@ -38,8 +39,10 @@ const MyEnrollClass = () => {
               <p>
                 <strong>Enrollment:</strong> {classItem.enrollment}
               </p>
-              <div className="card-actions ">
+              <div className="">
+                <Link to={`/dashboard/myenroll-class/${classItem._id}`}>
                 <button className="btn btn-block bg-primaryColor">Continue</button>
+                </Link>
               </div>
             </div>
           </div>

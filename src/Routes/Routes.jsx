@@ -28,6 +28,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import Review from "../Pages/Review";
 import Update from "../Pages/TeacherRoute/Update/Update";
 import SeeDetails from "../Pages/TeacherRoute/SeeDetails/SeeDetails";
+import MyEnrollClassDetails from "../LayOut/Dashboard/StudentDashboard/MyEnrollClassDetails/MyEnrollClassDetails";
 // import Feedback from "../Component/Feedback/Feedback"
  const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ import SeeDetails from "../Pages/TeacherRoute/SeeDetails/SeeDetails";
           path:'/pay/:id',
           element:<PaymantPage></PaymantPage>,
           loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+        },
+        {
+          path:'/review',
+          element:<Review></Review>
         }
        
         
@@ -82,10 +87,13 @@ import SeeDetails from "../Pages/TeacherRoute/SeeDetails/SeeDetails";
               path:'myEnrollment',
               element:<MyEnrollClass></MyEnrollClass>
           },
-          {
-           path:'feedback',
-           element:<PrivateRoute><Review></Review></PrivateRoute>
-          },
+         {
+          path:'myenroll-class/:id',
+          element:<MyEnrollClassDetails></MyEnrollClassDetails>,
+          loader:({params})=>
+            fetch(`http://localhost:5000/class/${params.id}`)
+         } ,
+         
           // Teachers route
           {
             path:'teacherHome',

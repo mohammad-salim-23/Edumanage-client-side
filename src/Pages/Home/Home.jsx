@@ -1,3 +1,4 @@
+import Review from "../Review";
 import TeacherRequest from "../TeacherRequest/TeacherRequest";
 import Banner from "./Banner/Banner";
 import Partner from "./Partner/Partner";
@@ -11,7 +12,7 @@ const Home = () => {
             <Partner></Partner>
             <PopularClass></PopularClass>
             <TeacherRequest></TeacherRequest>
-
+           <Review></Review>
         </div>
     );
 };

@@ -1,51 +1,79 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure/useAxiosSecure";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const SeeDetails = () => {
   const { register, handleSubmit, reset } = useForm();
   const classInfo = useLoaderData();
   const axiosSecure = useAxiosSecure();
-  const [assignments, setAssignments] = useState([]);
-  console.log(classInfo);
+  const queryClient = useQueryClient();
+
+  // Fetch assignments for the class
+  const { data: assignments = [] } = useQuery({
+    queryKey: ["assignments", classInfo._id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/assignments/${classInfo._id}`);
+      return res.data;
+    },
+  });
+
+  // Mutation for submitting an assignment
+  const submitAssignmentMutation = useMutation({
+    mutationFn: async (assignmentId) => {
+      await axiosSecure.put(`/assignments/submit/${assignmentId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["assignments", classInfo._id]);
+    },
+  });
+
+  // Handle assignment form submission
   const onSubmit = async (data) => {
     const assignment = {
       title: data.title,
       deadline: data.deadline,
       description: data.description,
-      submission:data.submission,
-      classId: classInfo._id, // Ensure the assignment is linked to the specific class
+      submission: 0,
+      classId: classInfo._id, // Link the assignment to the specific class
     };
 
     const response = await axiosSecure.post("/assignments", assignment);
 
     if (response.data.insertedId) {
-      // Successfully created assignment, update local state
-      setAssignments([...assignments, response.data]);
       reset(); // Reset form fields
       document.getElementById("my_modal_5").close(); // Close the modal
+      queryClient.invalidateQueries(["assignments", classInfo._id]);
     } else {
-      // Handle error (optional)
       console.error("Failed to create assignment");
     }
   };
 
+  // Handle assignment submission
+  const handleSubmitAssignment = (assignmentId) => {
+    submitAssignmentMutation.mutate(assignmentId);
+  };
+
   return (
     <div>
-      {/* Class Progress Section */}
       <div className="">
         <h1 className="text-2xl font-bold text-center">Class Progress</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 font-medium">
           <div className="card-body">
-            <h2>Total Enrollment:{classInfo.enrollment}</h2>
+            <h2>Total Enrollment: {classInfo.enrollment}</h2>
           </div>
           <div className="card-body">
-            <h2>Total Assignments:{assignments.length}</h2>
+            <h2>Total Assignments: {assignments.length}</h2>
           </div>
           <div className="card-body">
-            <h2>Per Day Assignment Submissions:{assignments?.submissionsCount}</h2>
-            
+            <h2>
+              Per Day Assignment Submissions:{" "}
+              {assignments.reduce(
+                (total, assignment) => total + (assignment.submission || 0),
+                0
+              )}
+            </h2>
           </div>
         </div>
         <button
@@ -79,8 +107,6 @@ const SeeDetails = () => {
                 className="input input-bordered w-full"
               />
             </div>
-           
-          
             <div className="form-control w-full my-6">
               <label className="label-text">Assignment Description*</label>
               <textarea
@@ -104,6 +130,8 @@ const SeeDetails = () => {
           </form>
         </div>
       </dialog>
+
+    
     </div>
   );
 };

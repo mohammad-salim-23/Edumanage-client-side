@@ -91,10 +91,7 @@ const Dashboard = () => {
             <FaUserAlt></FaUserAlt>
              My Profile
             </NavLink>
-            <NavLink to="/dashboard/feedback">
-            <FaStar></FaStar>
-             Feedback
-            </NavLink>
+           
             
           </li>
           </>
