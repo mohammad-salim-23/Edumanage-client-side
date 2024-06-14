@@ -1,9 +1,4 @@
-
-
-import {
-    createBrowserRouter,
-    
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "../Component/Root";
 import Home from "../Pages/Home/Home";
 import AllClass from "../Pages/AllClass/AllClass";
@@ -30,128 +25,155 @@ import Update from "../Pages/TeacherRoute/Update/Update";
 import SeeDetails from "../Pages/TeacherRoute/SeeDetails/SeeDetails";
 import MyEnrollClassDetails from "../LayOut/Dashboard/StudentDashboard/MyEnrollClassDetails/MyEnrollClassDetails";
 // import Feedback from "../Component/Feedback/Feedback"
- const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Root></Root>,
-      errorElement: <ErrorPage></ErrorPage>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-          path:'allClasses',
-          element:<AllClassForAll></AllClassForAll>
-        },
-        {
-          path:'teach',
-          element:<PrivateRoute><Teach></Teach></PrivateRoute>
-        },
-        {
-          path:"/signin",
-          element:<SignIn></SignIn>
-        },
-        {
-          path:'/signUp',
-          element:<SignUp></SignUp>
-        },
-        {
-          path:'/classDetails/:id',
-          element:<PrivateRoute><ClassDetails></ClassDetails></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/class/${params.id}`)
-        },
-        {
-          path:'/pay/:id',
-          element:<PaymantPage></PaymantPage>,
-          loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
-        },
-        {
-          path:'/review',
-          element:<Review></Review>
-        }
-       
-        
-      ]
-    },
-    
-       // admin routes
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
       {
-        path:"dashboard",
-        element:<PrivateRoute>
-          <Dashboard></Dashboard>
-        </PrivateRoute>,
-         errorElement: <ErrorPage></ErrorPage>,
-        children:[
-          {
-              path:'myEnrollment',
-              element:<MyEnrollClass></MyEnrollClass>
-          },
-         {
-          path:'myenroll-class/:id',
-          element:<MyEnrollClassDetails></MyEnrollClassDetails>,
-          loader:({params})=>
-            fetch(`http://localhost:5000/class/${params.id}`)
-         } ,
-         
-          // Teachers route
-          {
-            path:'teacherHome',
-            element:<TeacherHome></TeacherHome>
-          },
-          {
-            path:'myProfile',
-            element:<MyProfile></MyProfile>
-          },
-          {
-            path:'update/:id',
-            element:<Update></Update>,
-            loader:({params})=>
-              fetch(`http://localhost:5000/class/${params.id}`)
-          }
-          ,
-          {
-              path:'my-class/:id',
-              element:<SeeDetails></SeeDetails>,
-              loader:({params})=>
-                fetch(`http://localhost:5000/class/${params.id}`)
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "allClasses",
+        element: <AllClassForAll></AllClassForAll>,
+      },
+      {
+        path: "teach",
+        element: (
+          <PrivateRoute>
+            <Teach></Teach>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/signin",
+        element: <SignIn></SignIn>,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/classDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ClassDetails></ClassDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://educationalwebsite-sigma.vercel.app/class/${params.id}`
+          ),
+      },
+      {
+        path: "/pay/:id",
+        element: <PaymantPage></PaymantPage>,
+        loader: ({ params }) =>
+          fetch(
+            `https://educationalwebsite-sigma.vercel.app/payment/${params.id}`
+          ),
+      },
+      {
+        path: "/review",
+        element: <Review></Review>,
+      },
+    ],
+  },
 
-          },
-          {
-            path:'myClass',
-            element:<MyClass></MyClass>
-          },
-          {
-            path:'addClass',
-            element:<AddClass></AddClass>
-          },
-         
-          
-          
-        //  admin Routes
-        {
-          path:"adminHome",
-          element:<AdminRoute>
+  // admin routes
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "myEnrollment",
+        element: <MyEnrollClass></MyEnrollClass>,
+      },
+      {
+        path: "myenroll-class/:id",
+        element: <MyEnrollClassDetails></MyEnrollClassDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `https://educationalwebsite-sigma.vercel.app/class/${params.id}`
+          ),
+      },
+
+      // Teachers route
+      {
+        path: "teacherHome",
+        element: <TeacherHome></TeacherHome>,
+      },
+      {
+        path: "myProfile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "update/:id",
+        element: <Update></Update>,
+        loader: ({ params }) =>
+          fetch(
+            `https://educationalwebsite-sigma.vercel.app/class/${params.id}`
+          ),
+      },
+      {
+        path: "my-class/:id",
+        element: <SeeDetails></SeeDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `https://educationalwebsite-sigma.vercel.app/class/${params.id}`
+          ),
+      },
+      {
+        path: "myClass",
+        element: <MyClass></MyClass>,
+      },
+      {
+        path: "addClass",
+        element: <AddClass></AddClass>,
+      },
+
+      //  admin Routes
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
             <AdminHome></AdminHome>
           </AdminRoute>
-        }
-        ,
-        {
-          path:'users',
-          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
-        },
-        {
-          path:'reqTeacher',
-          element:<AdminRoute><TeacherRequestList></TeacherRequestList></AdminRoute>
-        },
-        {
-          path:'allClass',
-          element:<AdminRoute><AllClass></AllClass></AdminRoute>
-        }
-
-        ]
-      }
-    
-  ]);
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "reqTeacher",
+        element: (
+          <AdminRoute>
+            <TeacherRequestList></TeacherRequestList>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "allClass",
+        element: (
+          <AdminRoute>
+            <AllClass></AllClass>
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
+]);
 
 export default router;
