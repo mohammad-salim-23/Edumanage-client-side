@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure/useAxiosSecure";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
 const AllClass = () => {
   const axiosSecure = useAxiosSecure();
+  const [currentPage,setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const { data: classes = [], refetch } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -11,6 +14,13 @@ const AllClass = () => {
       return res.data;
     },
   });
+  const totalPages = Math.ceil(classes.length/itemsPerPage);
+  const displayedClasses = classes.slice((currentPage-1)*itemsPerPage,
+currentPage*itemsPerPage);
+
+const handlePageChange=(newPage)=>{
+  setCurrentPage(newPage);
+}
 
   const handleApprove = async (newClass) => {
     try {
@@ -52,7 +62,7 @@ const AllClass = () => {
             </tr>
           </thead>
           <tbody>
-            {classes.map((newClass, index) => (
+            {displayedClasses.map((newClass, index) => (
               <tr key={newClass._id}>
                 <td>{index + 1}</td>
                 <td>{newClass.name}</td>
@@ -89,6 +99,33 @@ const AllClass = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center mt-4">
+        <button 
+        onClick={()=>handlePageChange(currentPage-1)}
+        disabled={currentPage===1}
+        className="btn btn-outline mx-1"
+        >
+          Previous
+          </button>
+          {[...Array(totalPages)].map((_,index)=>(
+           <button 
+           key={index}
+           onClick={()=>handlePageChange(index+1)}
+           className={`btn mx-1 ${currentPage===index+1?"btn-active":""}`}
+           >
+           {index+1}
+           </button>
+        
+          )
+          )}
+           <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="btn btn-outline mx-1"
+           >
+             Next
+          </button>
       </div>
     </div>
   );

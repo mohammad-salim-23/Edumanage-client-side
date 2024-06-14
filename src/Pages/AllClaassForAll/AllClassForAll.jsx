@@ -35,8 +35,8 @@ const handlePageChange = (newPage)=>{
           <div key={classItem.id} className="card w-96 bg-base-100 shadow-xl">
             <img src={classItem.image} alt={classItem.title} className="h-96" />
             <h2 className="card-title">{classItem.title}</h2>
-            <p className="font-semibold">Posted by: {classItem.name}</p>
-            <p className="font-medium">Price: ${classItem.price}</p>
+            <p className="font-semibold">Posted by: MyC{classItem.name}</p>
+            <p className="font-medium">Price: {classItem.price}</p>
             <p className="">{classItem.description}</p>
             <p className="class-enrollment">
               Total Enrollment: {classItem.enrollment}
