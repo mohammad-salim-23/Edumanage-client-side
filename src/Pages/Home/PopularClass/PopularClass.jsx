@@ -25,7 +25,7 @@ const PopularClass = () => {
     return (
         <div>
             <h2 className="mt-3 text-center font-bold text-2xl"> <span className="text-green-600">Popular</span> Classes</h2>
-            <div className="md:carousel rounded-box">
+            <div className="lg:carousel rounded-box grid grid-cols-2 md:grid-cols-3">
                 {topClasses.map((classItem) => (
                     <div key={classItem._id} className="carousel-item p-4">
                         <div className=" bg-white rounded-lg shadow-lg p-4 text-center">

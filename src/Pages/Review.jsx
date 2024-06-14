@@ -12,17 +12,25 @@ const Review = () => {
     }
   });
 
-  console.log(classesWithFeedback);
+  
 
   return (
-    <div>
+  <div>
+    <h2 className="mt-3 text-center font-bold text-2xl"> Student's <span className="text-green-600">Feedback</span></h2>
+      <div className="lg:carousel rounded-box grid grid-cols-2 md:grid-cols-3">
       {classesWithFeedback.map((feedback, index) => (
-        <div key={index}>
-          <h3>{feedback.className}</h3>
-          <p>{feedback.feedback}</p>
+        <div className="carousel-item p-4" key={index}>
+          <div>
+          <img className="h-48 w-full object-cover rounded-lg" src={feedback.image} alt="Shoes" />
+          <h3 className="text-xl font-semibold mb-2">class title:{feedback.title}</h3>
+          <p>{feedback.description}</p>
+          <h3 className="font-medium">posted-by:{feedback.name}</h3>
+          </div>
+          
         </div>
       ))}
     </div>
+  </div>
   );
 };
 
