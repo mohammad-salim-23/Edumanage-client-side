@@ -1,144 +1,163 @@
 🎓 Welcome to 3 Idiots Academy
-3 Idiots Academy is an online educational platform that connects students with courses and instructors worldwide.
 
-🔗live-link: https://edumanage-client-side.web.app
+3 Idiots Academy is an online educational platform connecting students with courses and instructors worldwide.
+
+🔗 Live Demo
 
 🚀 Features
-User Authentication: Students can sign up, log in, and manage their profiles.
 
-Course Enrollment: Browse courses, enroll in them, and track your progress.
+User Authentication: Students can sign up, log in, and manage profiles.
 
-Instructor Requests: Potential instructors can apply to teach courses and manage their applications.
+Course Enrollment: Browse, enroll, and track progress in courses.
 
-Payment Integration: Secure course purchases through Stripe payment gateway.
+Instructor Requests: Instructors can apply to teach and manage applications.
 
-Feedback System: Students can provide feedback for courses and instructors.
+Payment Integration: Secure course purchases via Stripe.
 
-Responsive Design: Mobile-friendly design for seamless experience across devices.
+Feedback System: Students can provide feedback on courses and instructors.
 
-Admin Panel: Admins can manage users, courses, and instructor applications.
+Responsive Design: Mobile-optimized for seamless use on any device.
 
-Search & Filter: Search and filter courses based on categories, prices, and more.
+Admin Panel: Admins can manage users, courses, and instructor requests.
 
-Real-time Updates: Firebase for real-time database updates and notifications.
+Search & Filter: Search and filter courses by categories, prices, and more.
 
-Interactive Learning: Quizzes, assignments, and live sessions for an engaging learning experience.
+Real-time Updates: Firebase for real-time database and notifications.
+
+Interactive Learning: Quizzes, assignments, and live sessions for engagement.
 
 🛠 Technologies Used
-React.js – Frontend development and state management.
+React.js: Frontend development & state management.
 
-Firebase – Backend services (Firestore for database, Firebase Authentication, and Firebase Hosting).
+Firebase: Backend services (Firestore, Authentication, Hosting).
 
-Stripe – Payment gateway for secure course purchases.
+Stripe: Secure course payments.
 
-Vercel – Hosting and deployment platform.
+Vercel: Hosting and deployment.
 
-React Query – Efficient data fetching and synchronization with the backend.
+React Query: Efficient data fetching.
 
-Tailwind CSS – Utility-first CSS framework for responsive design.
+Tailwind CSS: Utility-first CSS framework.
 
-⚙️ Setup & Deployment Instructions
-1️⃣ Server Code Setup
-Clone the Server Repository:
+⚙️ Setup & Deployment
+
+1️⃣ Server Setup
+
+
+Clone the server repository:
+
+bash
 
 git clone https://github.com/mohammad-salim-23/Edumanage-server-side.git
-
-Install Dependencies:
-
+cd Edumanage-server-side
 npm install
+Create a .env file and add:
 
-Set Up Environment Variables:
-
-Create a .env file in the root of the server project and add the following environment variables:
-
+bash
 
 DATABASE_URL=your_database_url
+
 STRIPE_SECRET_KEY=your_stripe_secret_key
+
 FIREBASE_API_KEY=your_firebase_api_key
-Start the Server:
+
+Start the server:
+
+bash
 
 npm run dev
-
-The server will run on http://localhost:5000.
+The server runs at http://localhost:5000.
 
 2️⃣ Frontend Client Setup
 
-Clone the Frontend Repository:
+Clone the frontend repository:
 
+bash
 
 git clone https://github.com/mohammad-salim-23/Edumanage-client-side.git
 
-Install Dependencies:
-
+cd Edumanage-client-side
 
 npm install
-Set Up Environment Variables:
 
-Create a .env file and add the following variables:
+Create a .env file and add:
 
+bash
 
 VITE_API_URL=http://localhost:5000/api
+
 VITE_FIREBASE_API_KEY=your_firebase_api_key
+
 VITE_AUTH_DOMAIN=your_auth_domain
 
-Start the Client:
+Start the client:
+
+bash
 
 npm run dev
 
-The client will run on http://localhost:5173.
+The client runs at http://localhost:5173.
 
 3️⃣ Firebase Setup
-Create Firebase Project:
 
-Go to the Firebase Console.
-
-Create a new Firebase project.
+Go to the Firebase Console and create a project.
 
 Enable Firebase Authentication, Firestore, and Firebase Hosting.
 
-Firebase Configuration:
+Add your Firebase API keys to the .env file:
 
-Obtain your Firebase API keys and configuration from the Firebase Console.
-
-Store the Firebase config in your .env file:
-
+bash
 
 REACT_APP_FIREBASE_API_KEY=your_api_key
+
 REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+
 REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+
 4️⃣ Stripe Payment Integration
-Sign Up for Stripe: Create a Stripe account here.
 
-Obtain API Keys: Get your Stripe API keys from the Stripe Dashboard.
+Sign up for Stripe and get your API keys.
 
-Integrate Stripe:
-
-Use Stripe Checkout or Stripe Elements to handle course payments securely in your React app.
+Integrate Stripe Checkout or Stripe Elements for secure payments in React.
 
 5️⃣ Deploy to Vercel
-Sign Up/Login to Vercel: Create an account or log in at Vercel.
 
-Link GitHub Repo: Connect your GitHub repository to Vercel.
+Sign up/login to Vercel and link your GitHub repo.
 
-Deploy: Set up Vercel to build and deploy the app on every commit to the main branch.
+Vercel will automatically deploy on every push to the main branch.
 
-6️⃣ Environment Variables for Vercel
-Configure Vercel Environment Variables:
+6️⃣ Vercel Environment Variables
 
-Go to the Vercel Dashboard.
+Configure your Firebase and Stripe environment variables in the Vercel Dashboard.
 
-Define your Firebase and Stripe configuration details as environment variables.
+7️⃣ CI/CD
 
-7️⃣ Continuous Integration/Continuous Deployment (CI/CD)
-Set Up CI/CD: Use Vercel’s GitHub integration or CLI for continuous deployment.
+Set up CI/CD using Vercel's GitHub integration.
 
-Ensure that your project is automatically deployed on every new commit or change in the repository.
+Ensure the project auto-deploys on each commit.
 
 🔐 Admin Credentials
+
 Email: admin@example.com
 
 Password: Admin123@
 
 ✨ Contributors
+
 Mohammad Salim – Full Stack Developer
 
+🚀 Future Plans
+
+Advanced Analytics: Add analytics for tracking student progress, course popularity, and instructor performance.
+
+Live Mentorship: Enable live mentoring or tutoring sessions within the platform.
+
+Certification System: Implement a certification system upon course completion.
+
+Interactive Courses: Improve learning with interactive video content and peer collaboration.
+
+Discussion Forums: Add forums for students and instructors to interact and share ideas.
+
+Multi-language Support: Cater to a global audience by supporting multiple languages.
+
+Mobile App: Develop a mobile app for an enhanced learning experience on the go.
