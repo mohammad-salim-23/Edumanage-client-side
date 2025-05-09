@@ -1,7 +1,7 @@
 🎓 Welcome to 3 Idiots Academy
 3 Idiots Academy is an online educational platform that connects students with courses and instructors worldwide.
 
-🔗 Visit the live version of the project here.
+🔗live-link: https://edumanage-client-side.web.app
 
 🚀 Features
 User Authentication: Students can sign up, log in, and manage their profiles.
